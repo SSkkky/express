@@ -17,19 +17,21 @@ pushRouter.get('/publicKey', async function (req, res) { // 퍼블릭키는 프�
     // res.send(vapidKeys.publicKey);
     res.send(vapidKeys.publicKey);
 })
-
 pushRouter.post('/sendNoti', function (req, res) {
-    console.log('req~~~')
-    let data = JSON.stringify({ msg: 'hello pwa~!!' })
 
+    let data = JSON.stringify({msg:'hello pwa'})
+  
     setTimeout(function () {
-        webpush
-            // .sendNotification(req.body.subscription, data)
-            .sendNotification(req.body.subscribe, data)
-            .then(function () {
-                res.sendStatus(202);
-            })
-    }, 1000)
-})
+        webpush.sendNotification(req.body.subscribe,data)
+        .then(function () {
+          res.sendStatus(202);
+        })
+        .catch(function (error) {
+            res.sendStatus(500);
+            console.log(error);
+        });
+    }, 3000);
+  
+  })
 
 module.exports = pushRouter;

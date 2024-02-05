@@ -5,14 +5,11 @@ const { MongoClient } = require('mongodb');
 const connectUrl = process.env.MONGO_DB;
 const client = new MongoClient(connectUrl);
 let collection;
-const dbConnect = async () => {
-    await client.connect();
-}
 
 const crud = async (type, info) => {
-    const db = client.db('Bucket');
-    collection = db.collection('Bucket');
-    console.log("info ", info)
+    await client.connect();
+    const db = await client.db('Bucket');
+    collection = await db.collection('Bucket');
 
     switch (type) {
         case 'post': await collection.insertOne(info); break;
@@ -45,4 +42,4 @@ dataRouter.put('/data', async function (req, res) {
     //delete = get  parameters
 })
 
-module.exports = { dataRouter, dbConnect };
+module.exports = dataRouter;

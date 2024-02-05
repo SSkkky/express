@@ -10,10 +10,10 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use('/', bucket.dataRouter)
+app.use('/', bucket)
 app.use('/push', push)
 
 const PORT = 3333;
-app.listen(PORT, bucket.dbConnect, () => {
+app.listen(PORT, () => {
     console.log(`Server running... port :${PORT}`)
 })
