@@ -28,7 +28,7 @@ vueRouter.delete('/delete', async function (req, res) {
 vueRouter.get('/create', async function (req, res) {
     //console.log(req.query)
     const q = `
-        CREATE TABLE test2.count (
+        CREATE TABLE test.count (
             num INT NOT NULL AUTO_INCREMENT,
             name VARCHAR(20),
             email VARCHAR(100),
